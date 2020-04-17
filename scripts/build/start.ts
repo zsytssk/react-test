@@ -1,17 +1,15 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import { configFn } from './webpack.config';
-import { devServerConfig } from './devserver';
+import { webpackConfigFn } from '../webpack/webpack.config';
+import { devServerConfig } from '../webpack/devServer';
 
-const compiler = webpack(configFn());
+const compiler = webpack(webpackConfigFn('Test'));
 const devServerOptions = {
-	...devServerConfig,
-	...{
-		open: true,
-		stats: {
-			colors: true,
-		},
+	open: true,
+	stats: {
+		colors: true,
 	},
+	...devServerConfig,
 };
 
 const server = new WebpackDevServer(compiler, devServerOptions);

@@ -11,3 +11,5 @@
 * @ques import style from less
 
 * @ques husky > pre-commit (node v12.6.0)
+
+- @test @app...

@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./",
 		"sourceMap": true,
 		"allowJs": true,
 		"module": "commonjs",
@@ -10,7 +9,11 @@
 		"esModuleInterop": true,
 		"lib": ["es7", "dom"],
 		"jsx": "react",
-		"moduleResolution": "Node"
+		"moduleResolution": "Node",
+		"baseUrl": "./",
+		"paths": {
+			"@app/*": ["src/*"]
+		}
 	},
 	"exclude": ["build", "node_modules"]
 }
