@@ -1,0 +1,18 @@
+@import 'base';
+@import 'mixin';
+@import 'extend';
+@import 'buildIn';
+
+.box {
+	background-color: @primary-color;
+	.transform (rotate(deg));;
+
+	.child {
+		&:extend(.extend);
+
+		border: 1px solid red;
+		background-color: blue;
+		margin-bottom: 10px;
+		color: #fff;
+	}
+}

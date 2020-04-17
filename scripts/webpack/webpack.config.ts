@@ -1,15 +1,17 @@
 import path from 'path';
+import webpack, { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-export = (env?, argv?) => {
+const projectPath = path.resolve(__dirname, '../../');
+export const configFn = (env?, argv?) => {
 	return {
 		entry: './src/main.tsx',
 		output: {
-			path: path.resolve(__dirname, 'dist'),
+			path: path.resolve(projectPath, 'dist'),
 			filename: '[name].[hash].js',
 		},
-		mode: 'development',
+		mode: 'development' as Configuration['mode'],
 		module: {
 			rules: [
 				{
