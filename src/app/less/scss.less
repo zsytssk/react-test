@@ -1,18 +1,26 @@
-@import 'base';
-@import 'mixin';
-@import 'extend';
-@import 'buildIn';
+@import './base.less';
+@import './mixin.less';
+@import './extend.less';
+@import './buildIn.less';
+
+@dr: {
+	value: foo;
+};
 
 .box {
-	background-color: @primary-color;
-	.transform (rotate(deg));;
-
 	.child {
 		&:extend(.extend);
-
 		border: 1px solid red;
-		background-color: blue;
 		margin-bottom: 10px;
-		color: #fff;
 	}
+}
+
+.class {
+	.box .child();
+
+	.loop(5);
+
+	.mixinTest(#eee);
+
+	test: @dr[value];
 }
