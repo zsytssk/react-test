@@ -15,5 +15,5 @@
 			"@app/*": ["src/*"]
 		}
 	},
-	"exclude": ["build", "node_modules"]
+	"include": ["src"]
 }

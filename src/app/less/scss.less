@@ -3,24 +3,32 @@
 @import './extend.less';
 @import './buildIn.less';
 
-@dr: {
-	value: foo;
-};
+#bundle() {
+	primary: blue;
+	secondary: green;
+
+	.button {
+		display: block;
+		border: 1px solid black;
+		background-color: grey;
+		&:hover {
+			background-color: white;
+		}
+	}
+}
 
 .box {
 	.child {
 		&:extend(.extend);
 		border: 1px solid red;
 		margin-bottom: 10px;
+
+		#bundle.button();
 	}
 }
 
 .class {
 	.box .child();
 
-	.loop(5);
-
-	.mixinTest(#eee);
-
-	test: @dr[value];
+	color: #bundle[primary];
 }

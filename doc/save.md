@@ -1,7 +1,3 @@
-build
-
-## 2020-04-22 09:33:20
-
 - @todo clean react project with less
   - react...
   - webpack...
