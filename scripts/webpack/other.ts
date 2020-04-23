@@ -1,8 +1,9 @@
 import path from 'path';
+import { paths } from './paths';
 
 export const resolve = {
 	extensions: ['.js', '.jsx', '.ts', '.tsx'],
 	alias: {
-		'@app': path.resolve(__dirname, './src'),
+		'@app': paths.appSrc,
 	},
 };

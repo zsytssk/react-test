@@ -1,18 +1,16 @@
-import path from 'path';
 import { Configuration } from 'webpack';
 import { cssLoader, fileLoader, tsLoader } from './loader';
 import { resolve } from './other';
 import { plugins } from './plugin';
-
-const projectPath = path.resolve(__dirname, '../../');
+import { paths } from './paths';
 
 type Env = 'Test' | 'Dev' | 'Prod';
 export const webpackConfigFn = (env: Env) => {
 	const mode: Configuration['mode'] = env === 'Prod' ? 'production' : 'development';
 	return {
-		entry: './src/main.tsx',
+		entry: paths.appIndexJs,
 		output: {
-			path: path.resolve(projectPath, 'dist'),
+			path: paths.appBuild,
 			filename: '[name].[hash].js',
 		},
 		mode,

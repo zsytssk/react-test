@@ -1,9 +1,8 @@
 import webpack, { Stats } from 'webpack';
-import chalk from 'chalk';
 import { webpackConfigFn } from '../webpack/webpack.config';
+import { log, logWarn, logError } from '../utils/log';
 
 const config = webpackConfigFn('Prod');
-
 type BuildResult = {
 	stats: Stats;
 	warnings: string[];
@@ -52,14 +51,14 @@ function build() {
 
 build()
 	.then((data) => {
-		console.log(chalk.blue(data.stats.toString()));
+		log(data.stats.toString());
 		if (data.warnings) {
-			console.log(chalk.yellow(data.warnings));
+			logWarn(data.warnings);
 		}
 	})
 	.catch((err) => {
 		if (err && err.message) {
-			console.log(chalk.red(err.message));
+			logError(err.message);
 		}
 		process.exit(1);
 	});
