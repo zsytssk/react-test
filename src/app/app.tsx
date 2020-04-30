@@ -7,6 +7,7 @@ import { UseLayoutEffect } from './hook/useLayoutEffect';
 import { UseDebugValueWrap } from './hook/useDebugValue';
 import { UseIntervalDemo, UseCusHookDemo } from './hook/cusHook';
 import { UseLessTest } from './less/scss';
+import { StateTest } from './stateTest/stateTest';
 
 const App = () => {
 	return (
@@ -19,7 +20,8 @@ const App = () => {
 			{/* <UseLayoutEffect /> */}
 			{/* <UseDebugValueWrap /> */}
 			{/* <UseCusHookDemo /> */}
-			<UseLessTest />
+			{/* <UseLessTest /> */}
+			<StateTest />
 		</>
 	);
 };
