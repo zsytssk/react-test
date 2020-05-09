@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { UseReducerFc } from './hook/useReducer';
 // import { UseMemoFc } from './hook/useMemo';
 // import { UseCallback } from './hook/useCallback';
@@ -13,9 +13,22 @@ import aniPng from '../assets/ani/ani.png';
 import aniJson from '../assets/ani/ani.json';
 import rocketPng from '../assets/ani/rocket.png';
 import rocketJson from '../assets/ani/rocket.json';
+import { Svga, SvgaWrap } from './svga/svga';
+import fishSvga from '../assets/svga/fish.svga';
 
 const App = () => {
 	const [show, setShow] = useState(true);
+
+	useEffect(() => {
+		const fn = () => {
+			setShow(!show);
+		};
+		document.body.addEventListener('click', fn);
+		return () => {
+			document.body.removeEventListener('click', fn);
+		};
+	}, [show]);
+
 	return (
 		<>
 			{/* <ReduxTest /> */}
@@ -28,29 +41,17 @@ const App = () => {
 			{/* <UseCusHookDemo /> */}
 			{/* <UseLessTest /> */}
 			{/* <StateTest /> */}
-			{show && (
-				<FrameAni
-					png={aniPng}
-					json={aniJson}
-					interval={40}
-					// time={10}
-					endFn={() => {
-						setShow(false);
-					}}
-				/>
-			)}
-			{show && (
-				<FrameAni
-					png={rocketPng}
-					json={rocketJson}
-					interval={40}
-					anchorX={0}
-					anchorY={0}
-					endFn={() => {
-						setShow(false);
-					}}
-				/>
-			)}
+			<FrameAni
+				png={rocketPng}
+				json={rocketJson}
+				interval={40}
+				anchorX={0}
+				anchorY={0}
+				endFn={() => {
+					setShow(false);
+				}}
+			/>
+			<SvgaWrap url={fishSvga} time={10} />
 		</>
 	);
 };

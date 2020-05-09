@@ -19,7 +19,7 @@ export const cssLoader = {
 };
 
 export const fileLoader = {
-	test: /\.(png|jpg|svg|gif)$/,
+	test: /\.(png|jpg|svg|gif|svga)$/,
 	exclude: /node_modules/,
 	use: ['file-loader'],
 };
