@@ -1,35 +1,40 @@
 import { EventCom } from '../eventCom';
 import { useState, useEffect } from 'react';
 
+const StateEvent = {
+	ChangeCount: 'change_count',
+	ChangeTest: 'change_test',
+};
 class StateModel extends EventCom {
 	public count = 0;
-	public changeIndex = 0;
 	public test = { x: 1 };
 	public setCount = () => {
 		this.count++;
-		this.changeIndex++;
-		this.emit('change');
+		this.emit(StateEvent.ChangeCount);
 	};
 	public setTest = () => {
 		this.test.x++;
-		this.emit('change');
-		this.changeIndex++;
+		this.emit(StateEvent.ChangeTest);
 	};
 }
 
 let state = new StateModel();
 export function getState() {
 	const [_state, setState] = useState(state);
-	const [changeIndex, setChangeIndex] = useState(state?.changeIndex);
+	const [changeIndex, setChangeIndex] = useState(0);
 
 	useEffect(() => {
 		const fn = () => {
 			setState(state);
-			setChangeIndex(state.changeIndex);
+			setChangeIndex(changeIndex + 1);
 		};
-		state.on('change', fn);
-		return () => state.off('change', fn);
-	}, []);
+		state.on(StateEvent.ChangeCount, fn);
+		state.on(StateEvent.ChangeTest, fn);
+		return () => {
+			state.off(StateEvent.ChangeCount, fn);
+			state.off(StateEvent.ChangeTest, fn);
+		};
+	}, [changeIndex]);
 
-	return [_state, changeIndex] as [StateModel, number];
+	return [_state] as [StateModel];
 }

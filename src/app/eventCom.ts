@@ -1,3 +1,5 @@
+type Func<T> = (...params: []) => T;
+
 /** 每一个event的数据 */
 export type EventData = Set<{
 	caller: any;

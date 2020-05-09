@@ -1,5 +1,10 @@
 build
 
+- @ques https://juejin.im/post/5c7bd2646fb9a049cb197921
+- @todo stop play once interval
+
+- 骨骼动画
+
 ## 2020-04-22 09:33:20
 
 - @todo clean react project with less
