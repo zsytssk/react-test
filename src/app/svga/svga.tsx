@@ -68,9 +68,9 @@ export function Svga(props: Props) {
 			id={state}
 			style={{
 				transform: `translate(-${100 * anchorX}%, -${100 * anchorY}%)`,
-				// position: 'absolute',
-				// top: x,
-				// left: y,
+				position: 'absolute',
+				top: x,
+				left: y,
 			}}
 		></canvas>
 	);

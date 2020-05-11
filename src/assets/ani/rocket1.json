@@ -1,0 +1,127 @@
+{
+    "frames": {
+        "armatureName_rocket1_0.png": {
+            "frame": {
+                "h": 593,
+                "idx": 0,
+                "w": 156,
+                "x": 0,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 17,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_1.png": {
+            "frame": {
+                "h": 545,
+                "idx": 0,
+                "w": 157,
+                "x": 157,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 17,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_2.png": {
+            "frame": {
+                "h": 531,
+                "idx": 0,
+                "w": 161,
+                "x": 315,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 14,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_3.png": {
+            "frame": {
+                "h": 509,
+                "idx": 0,
+                "w": 159,
+                "x": 315,
+                "y": 532
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 15,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_4.png": {
+            "frame": {
+                "h": 531,
+                "idx": 0,
+                "w": 166,
+                "x": 477,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 8,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_5.png": {
+            "frame": {
+                "h": 546,
+                "idx": 0,
+                "w": 173,
+                "x": 644,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 4,
+                "y": 0
+            }
+        },
+        "armatureName_rocket1_6.png": {
+            "frame": {
+                "h": 593,
+                "idx": 0,
+                "w": 156,
+                "x": 818,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 639,
+                "w": 182
+            },
+            "spriteSourceSize": {
+                "x": 17,
+                "y": 0
+            }
+        }
+    },
+    "meta": {
+        "image": "rocket1.png",
+        "prefix": "rocket1/"
+    }
+}

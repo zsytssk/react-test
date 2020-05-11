@@ -1,0 +1,773 @@
+{
+    "frames": {
+        "armatureName_logo_00.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 918
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_01.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_02.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_03.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 918
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_04.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 1071
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_05.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_06.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_07.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_08.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1630,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_09.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_10.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_11.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_12.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 1071
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_13.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_14.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_15.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1630,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_16.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_17.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 918
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_18.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 1071
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_19.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_20.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1630,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_21.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 918
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_22.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_23.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_24.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_25.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_26.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_27.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1630,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_28.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_29.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_30.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 332,
+                "x": 652,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_31.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 339,
+                "x": 985,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_32.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 337,
+                "x": 1325,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_33.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1663,
+                "y": 153
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_34.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_35.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 459
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_36.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 612
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_37.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 765
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_38.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 918
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_39.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 0,
+                "y": 1071
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_40.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 326,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_41.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 652,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_42.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 978,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_43.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1304,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        },
+        "armatureName_logo_44.png": {
+            "frame": {
+                "h": 152,
+                "idx": 0,
+                "w": 325,
+                "x": 1630,
+                "y": 306
+            },
+            "sourceSize": {
+                "h": 173,
+                "w": 362
+            },
+            "spriteSourceSize": {
+                "x": 13,
+                "y": 16
+            }
+        }
+    },
+    "meta": {
+        "image": "loading.png",
+        "prefix": "loading/"
+    }
+}

@@ -10,7 +10,7 @@ type Pos = {
 	y: number;
 };
 type Props = {
-	png: string;
+	png: string[];
 	json: any;
 	interval: number;
 	time?: number;
@@ -29,19 +29,29 @@ export function FrameAni(props: Props) {
 	const { png, json, interval, time, endFn, x, y, anchorX, anchorY } = props;
 	const ref = useRef<boolean>();
 	const [size, setSize] = useState<Size>();
-	const [pos, setPos] = useState<Pos>();
+	const [innerPos, setInnerPos] = useState<Pos>();
+	const [innerSize, setInnerSize] = useState<Size>();
+	const [bgPos, setBgPos] = useState<Pos>();
 	const [bgSize, setBgSize] = useState<Size>();
+	const [pngIdx, setPngIdx] = useState<number>();
 
 	useEffect(() => {
-		const img = new Image();
-		img.onload = () => {
-			setBgSize({
-				width: img.width,
-				height: img.height,
-			});
-			ref.current = true;
-		};
-		img.src = png;
+		const length = png.length;
+		let i = 0;
+		for (const item_png of png) {
+			const img = new Image();
+			img.onload = () => {
+				setBgSize({
+					width: img.width,
+					height: img.height,
+				});
+				i++;
+				if (i >= length) {
+					ref.current = true;
+				}
+			};
+			img.src = item_png;
+		}
 	}, []);
 
 	useEffect(() => {
@@ -63,11 +73,17 @@ export function FrameAni(props: Props) {
 				}
 			}
 			const key = keys[i];
+			// console.log()frames[key]
 			const {
-				frame: { h, w, x, y },
+				frame: { h, w, x, y, idx },
+				sourceSize: { h: sh, w: sw },
+				spriteSourceSize: { x: sx, y: sy },
 			} = frames[key];
-			setPos({ x, y });
-			setSize({ width: w, height: h });
+			setBgPos({ x, y });
+			setSize({ width: sw, height: sh });
+			setInnerSize({ width: w, height: h });
+			setInnerPos({ x: sx, y: sy });
+			setPngIdx(idx);
 			i = i + t;
 		};
 		const off = loop(fn, interval, fn);
@@ -85,7 +101,6 @@ export function FrameAni(props: Props) {
 			style={{
 				width: size?.width,
 				height: size?.height,
-				overflow: 'hidden',
 				transform: `translate(-${100 * anchorX}%, -${100 * anchorY}%)`,
 				position: 'absolute',
 				top: x,
@@ -93,13 +108,25 @@ export function FrameAni(props: Props) {
 			}}
 		>
 			<div
+				className="inner"
 				style={{
-					width: bgSize?.width,
-					height: bgSize?.height,
-					transform: `translate3d(-${pos?.x}px, ${-pos?.y}px, 0)`,
-					backgroundImage: `url(${png})`,
+					position: 'absolute',
+					overflow: 'hidden',
+					width: innerSize?.width,
+					height: innerSize?.height,
+					left: innerPos?.x,
+					top: innerPos?.y,
 				}}
-			></div>
+			>
+				<div
+					style={{
+						width: bgSize?.width,
+						height: bgSize?.height,
+						transform: `translate3d(-${bgPos?.x}px, ${-bgPos?.y}px, 0)`,
+						backgroundImage: `url(${png[pngIdx]})`,
+					}}
+				></div>
+			</div>
 		</div>
 	);
 }

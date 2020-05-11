@@ -1,0 +1,365 @@
+{
+    "frames": {
+        "armatureName_exploding1_00.png": {
+            "frame": {
+                "h": 552,
+                "idx": 0,
+                "w": 545,
+                "x": 905,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        "armatureName_exploding1_01.png": {
+            "frame": {
+                "h": 48,
+                "idx": 0,
+                "w": 48,
+                "x": 856,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 249,
+                "y": 251
+            }
+        },
+        "armatureName_exploding1_02.png": {
+            "frame": {
+                "h": 77,
+                "idx": 0,
+                "w": 76,
+                "x": 367,
+                "y": 195
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 236,
+                "y": 236
+            }
+        },
+        "armatureName_exploding1_03.png": {
+            "frame": {
+                "h": 99,
+                "idx": 0,
+                "w": 97,
+                "x": 269,
+                "y": 195
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 226,
+                "y": 224
+            }
+        },
+        "armatureName_exploding1_04.png": {
+            "frame": {
+                "h": 224,
+                "idx": 0,
+                "w": 211,
+                "x": 1430,
+                "y": 1102
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 175,
+                "y": 162
+            }
+        },
+        "armatureName_exploding1_05.png": {
+            "frame": {
+                "h": 393,
+                "idx": 0,
+                "w": 380,
+                "x": 1049,
+                "y": 919
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 82,
+                "y": 71
+            }
+        },
+        "armatureName_exploding1_06.png": {
+            "frame": {
+                "h": 365,
+                "idx": 0,
+                "w": 356,
+                "x": 1049,
+                "y": 553
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 100,
+                "y": 85
+            }
+        },
+        "armatureName_exploding1_07.png": {
+            "frame": {
+                "h": 552,
+                "idx": 0,
+                "w": 545,
+                "x": 1451,
+                "y": 549
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        "armatureName_exploding1_08.png": {
+            "frame": {
+                "h": 506,
+                "idx": 0,
+                "w": 434,
+                "x": 614,
+                "y": 864
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 76,
+                "y": 23
+            }
+        },
+        "armatureName_exploding1_09.png": {
+            "frame": {
+                "h": 548,
+                "idx": 0,
+                "w": 419,
+                "x": 1451,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 63,
+                "y": 2
+            }
+        },
+        "armatureName_exploding1_10.png": {
+            "frame": {
+                "h": 299,
+                "idx": 0,
+                "w": 268,
+                "x": 0,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 138,
+                "y": 127
+            }
+        },
+        "armatureName_exploding1_11.png": {
+            "frame": {
+                "h": 323,
+                "idx": 0,
+                "w": 290,
+                "x": 614,
+                "y": 540
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 127,
+                "y": 115
+            }
+        },
+        "armatureName_exploding1_12.png": {
+            "frame": {
+                "h": 344,
+                "idx": 0,
+                "w": 309,
+                "x": 546,
+                "y": 195
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 118,
+                "y": 104
+            }
+        },
+        "armatureName_exploding1_13.png": {
+            "frame": {
+                "h": 364,
+                "idx": 0,
+                "w": 326,
+                "x": 287,
+                "y": 853
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 109,
+                "y": 94
+            }
+        },
+        "armatureName_exploding1_14.png": {
+            "frame": {
+                "h": 174,
+                "idx": 0,
+                "w": 136,
+                "x": 149,
+                "y": 853
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 204,
+                "y": 189
+            }
+        },
+        "armatureName_exploding1_15.png": {
+            "frame": {
+                "h": 181,
+                "idx": 0,
+                "w": 141,
+                "x": 145,
+                "y": 1046
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 202,
+                "y": 186
+            }
+        },
+        "armatureName_exploding1_16.png": {
+            "frame": {
+                "h": 186,
+                "idx": 0,
+                "w": 144,
+                "x": 0,
+                "y": 1046
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 200,
+                "y": 183
+            }
+        },
+        "armatureName_exploding1_17.png": {
+            "frame": {
+                "h": 192,
+                "idx": 0,
+                "w": 148,
+                "x": 0,
+                "y": 853
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 198,
+                "y": 180
+            }
+        },
+        "armatureName_exploding1_18.png": {
+            "frame": {
+                "h": 194,
+                "idx": 0,
+                "w": 150,
+                "x": 406,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 197,
+                "y": 179
+            }
+        },
+        "armatureName_exploding1_19.png": {
+            "frame": {
+                "h": 194,
+                "idx": 0,
+                "w": 136,
+                "x": 269,
+                "y": 0
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 205,
+                "y": 179
+            }
+        },
+        "armatureName_exploding1_20.png": {
+            "frame": {
+                "h": 552,
+                "idx": 0,
+                "w": 545,
+                "x": 0,
+                "y": 300
+            },
+            "sourceSize": {
+                "h": 552,
+                "w": 545
+            },
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    },
+    "meta": {
+        "image": "exploding1.png",
+        "prefix": "exploding1/"
+    }
+}
