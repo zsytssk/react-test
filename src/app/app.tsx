@@ -11,6 +11,7 @@ import { StateTest } from './stateTest/stateTest';
 import { Svga, SvgaWrap } from './svga/svga';
 import fishSvga from '../assets/svga/fish.svga';
 import { FrameAniDemo } from './ani/frameDemo';
+import { GetChildState } from './advance/getChildState';
 
 const App = () => {
 	const [show, setShow] = useState(true);
@@ -37,7 +38,8 @@ const App = () => {
 			{/* <UseCusHookDemo /> */}
 			{/* <UseLessTest /> */}
 			{/* <StateTest /> */}
-			<FrameAniDemo />
+			{/* <FrameAniDemo /> */}
+			<GetChildState />
 			{/* <SvgaWrap url={fishSvga} time={10} /> */}
 		</>
 	);

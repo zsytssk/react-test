@@ -73,7 +73,6 @@ export function FrameAni(props: Props) {
 				}
 			}
 			const key = keys[i];
-			// console.log()frames[key]
 			const {
 				frame: { h, w, x, y, idx },
 				sourceSize: { h: sh, w: sw },
@@ -103,8 +102,8 @@ export function FrameAni(props: Props) {
 				height: size?.height,
 				transform: `translate(-${100 * anchorX}%, -${100 * anchorY}%)`,
 				position: 'absolute',
-				top: x,
-				left: y,
+				top: y,
+				left: x,
 			}}
 		>
 			<div
