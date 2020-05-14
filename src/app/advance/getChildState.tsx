@@ -26,7 +26,7 @@ type Props = {
 };
 export function Child(props: Props) {
 	const { onChange, state: p_state } = props;
-	const [state, setState] = useState(p_state?.count || 0);
+	const [state, setState] = useState(0);
 
 	useEffect(() => {
 		if (onChange) {

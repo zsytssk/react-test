@@ -12,26 +12,16 @@ import { Svga, SvgaWrap } from './svga/svga';
 import fishSvga from '../assets/svga/fish.svga';
 import { FrameAniDemo } from './ani/frameDemo';
 import { GetChildState } from './advance/getChildState';
+import { ForceChildReRender } from './advance/forceChildReRender';
+import { UseCallback } from './hook/useCallback';
 
 const App = () => {
-	const [show, setShow] = useState(true);
-
-	useEffect(() => {
-		const fn = () => {
-			setShow(!show);
-		};
-		document.body.addEventListener('click', fn);
-		return () => {
-			document.body.removeEventListener('click', fn);
-		};
-	}, [show]);
-
 	return (
 		<>
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}
 			{/* <UseMemoFc /> */}
-			{/* <UseCallback /> */}
+			<UseCallback />
 			{/* <UseImperativeHandleParent /> */}
 			{/* <UseLayoutEffect /> */}
 			{/* <UseDebugValueWrap /> */}
@@ -39,8 +29,9 @@ const App = () => {
 			{/* <UseLessTest /> */}
 			{/* <StateTest /> */}
 			{/* <FrameAniDemo /> */}
-			<GetChildState />
+			{/* <GetChildState /> */}
 			{/* <SvgaWrap url={fishSvga} time={10} /> */}
+			{/* <ForceChildReRender /> */}
 		</>
 	);
 };
