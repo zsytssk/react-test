@@ -34,3 +34,11 @@ export function getSvgData(url: string) {
 
 	return task;
 }
+
+export function sleep(seconds: number = 0) {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve();
+		}, seconds * 1000);
+	});
+}

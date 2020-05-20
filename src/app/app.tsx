@@ -21,13 +21,13 @@ const App = () => {
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}
 			{/* <UseMemoFc /> */}
-			<UseCallback />
+			{/* <UseCallback /> */}
 			{/* <UseImperativeHandleParent /> */}
 			{/* <UseLayoutEffect /> */}
 			{/* <UseDebugValueWrap /> */}
 			{/* <UseCusHookDemo /> */}
 			{/* <UseLessTest /> */}
-			{/* <StateTest /> */}
+			<StateTest />
 			{/* <FrameAniDemo /> */}
 			{/* <GetChildState /> */}
 			{/* <SvgaWrap url={fishSvga} time={10} /> */}

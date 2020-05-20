@@ -1,5 +1,6 @@
 import { EventCom } from '../eventCom';
 import { useState, useEffect } from 'react';
+import { sleep } from '@app/utils/utils';
 
 const StateEvent = {
 	ChangeCount: 'change_count',
@@ -14,7 +15,9 @@ class StateModel extends EventCom {
 	};
 	public setTest = () => {
 		this.test.x++;
-		this.emit(StateEvent.ChangeTest);
+		sleep(1).then(() => {
+			this.emit(StateEvent.ChangeTest);
+		});
 	};
 }
 
@@ -28,13 +31,16 @@ export function getState() {
 			setState(state);
 			setChangeIndex(changeIndex + 1);
 		};
-		state.on(StateEvent.ChangeCount, fn);
-		state.on(StateEvent.ChangeTest, fn);
+		// 如果不做成异步的就会变成无限死循环
+		sleep().then(() => {
+			state.on(StateEvent.ChangeCount, fn);
+			state.on(StateEvent.ChangeTest, fn);
+		});
 		return () => {
 			state.off(StateEvent.ChangeCount, fn);
 			state.off(StateEvent.ChangeTest, fn);
 		};
 	}, [changeIndex]);
 
-	return [_state] as [StateModel];
+	return [_state, changeIndex] as [StateModel, number];
 }
