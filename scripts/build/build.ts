@@ -1,27 +1,43 @@
 import webpack, { Stats } from 'webpack';
 import { webpackConfigFn } from '../webpack/webpack.config';
 import { log, logWarn, logError } from '../utils/log';
+import { Subscriber, Observable } from 'rxjs';
+import { waitProcessExit } from '../zutil/utils/utils';
 
-const config = webpackConfigFn('Prod');
+export type Env = 'Test' | 'Dev' | 'Prod';
+export async function build(env: Env) {
+	const compiler = webpack(webpackConfigFn(env));
+	const is_watch = env !== 'Prod' ? true : false;
+	await waitBuild(compiler, is_watch);
+}
+build('Test');
+
 type BuildResult = {
-	stats: Stats;
-	warnings: string[];
+	type: 'error' | 'success';
+	data?: {
+		stats: Stats;
+		warnings: string[];
+	};
+	error?: Error;
 };
-function build() {
-	const compiler = webpack(config);
-	return new Promise((resolve, reject) => {
-		compiler.run((err, stats) => {
+
+function waitBuild(compiler: webpack.Compiler, is_watch: boolean) {
+	const observer = new Observable((subscriber: Subscriber<BuildResult>) => {
+		const handler = (error: Error, stats: Stats) => {
 			let messages: Partial<Stats.ToJsonOutput>;
-			if (err) {
-				if (!err.message) {
-					return reject(err);
+			if (error) {
+				if (!error.message) {
+					return subscriber.next({
+						type: 'error',
+						error,
+					});
 				}
 
-				let errMessage = err.message;
+				let errMessage = error.message;
 
 				// Add additional information for postcss errors
-				if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
-					errMessage += '\nCompileError: Begins at CSS selector ' + err['postcssNode'].selector;
+				if (Object.prototype.hasOwnProperty.call(error, 'postcssNode')) {
+					errMessage += '\nCompileError: Begins at CSS selector ' + error['postcssNode'].selector;
 				}
 
 				messages = {
@@ -38,27 +54,49 @@ function build() {
 				if (messages.errors.length > 1) {
 					messages.errors.length = 1;
 				}
-				return reject(new Error(messages.errors.join('\n\n')));
+				return subscriber.next({
+					type: 'error',
+					error: new Error(messages.errors.join('\n\n')),
+				});
 			}
 
-			return resolve({
-				stats,
-				warnings: messages.warnings,
+			return subscriber.next({
+				type: 'success',
+				data: {
+					stats,
+					warnings: messages.warnings,
+				},
 			});
-		});
-	}) as Promise<BuildResult>;
-}
+		};
 
-build()
-	.then((data) => {
+		if (is_watch) {
+			compiler.watch({}, handler);
+		} else {
+			compiler.run(handler);
+		}
+	});
+
+	const then_fn = (res: BuildResult) => {
+		const { data, type, error } = res;
+		if (type === 'error') {
+			return logError(error);
+		}
 		log(data.stats.toString());
 		if (data.warnings) {
 			logWarn(data.warnings);
 		}
-	})
-	.catch((err) => {
-		if (err && err.message) {
-			logError(err.message);
-		}
-		process.exit(1);
-	});
+	};
+
+	if (!is_watch) {
+		return new Promise((resolve, reject) => {
+			const subscribe = observer.subscribe((data) => {
+				then_fn(data);
+				resolve(data);
+				subscribe.unsubscribe();
+			});
+		});
+	} else {
+		observer.subscribe(then_fn);
+		return waitProcessExit();
+	}
+}

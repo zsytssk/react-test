@@ -3,6 +3,7 @@ import { cssLoader, fileLoader, tsLoader } from './loader';
 import { resolve } from './other';
 import { plugins } from './plugin';
 import { paths } from './paths';
+import { devServerConfig } from './devServer';
 
 type Env = 'Test' | 'Dev' | 'Prod';
 export const webpackConfigFn = (env: Env) => {
@@ -19,5 +20,6 @@ export const webpackConfigFn = (env: Env) => {
 		},
 		resolve,
 		plugins,
+		devServer: devServerConfig,
 	};
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addArticle, Article } from '../../redux/reducers';
-import { genId } from '../../utils/utils';
+import { genRandomStr } from '../../utils/utils';
 
 export const List = () => {
 	const articles = useSelector((state: any) => {
@@ -23,7 +23,7 @@ export const Form: React.FC = () => {
 
 	const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		dispatch(addArticle({ title, id: genId() }));
+		dispatch(addArticle({ title, id: genRandomStr() }));
 		setTile('');
 	};
 	const handleChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
