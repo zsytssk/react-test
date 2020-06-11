@@ -15,21 +15,23 @@ import { GetChildState } from './advance/getChildState';
 import { ForceChildReRender } from './advance/forceChildReRender';
 import { UseCallback } from './hook/useCallback';
 import UseRefParent from './hook/useRef';
+import { UseStateTest } from './hook/useState';
 
 const App = () => {
 	return (
 		<>
+			<UseStateTest />
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}
 			{/* <UseMemoFc /> */}
 			{/* <UseCallback /> */}
 			{/* <CreateRefParent /> */}
-			<UseRefParent />
+			{/* <UseRefParent /> */}
 			{/* <UseLayoutEffect /> */}
 			{/* <UseDebugValueWrap /> */}
 			{/* <UseCusHookDemo /> */}
 			{/* <UseLessTest /> */}
-			<StateTest />
+			{/* <StateTest /> */}
 			{/* <FrameAniDemo /> */}
 			{/* <GetChildState /> */}
 			{/* <SvgaWrap url={fishSvga} time={10} /> */}
