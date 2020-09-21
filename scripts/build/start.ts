@@ -14,6 +14,6 @@ async function main() {
 	};
 
 	const server = new WebpackDevServer(compiler, devServerOptions);
-	server.listen(3000, '127.0.0.1');
+	server.listen(4000, '127.0.0.1');
 }
 main();

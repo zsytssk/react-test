@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getState } from './stateManger';
 
 export function State2() {
-	const [state] = getState();
+	const [state, changeIndex] = getState();
+
+	useEffect(() => {}, [changeIndex]);
 	return (
 		<button onClick={state?.setCount}>
-			count:{state?.count}|test:{state?.test?.x}
+			count:{state?.count}|test:{state?.x}
 		</button>
 	);
 }
