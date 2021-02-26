@@ -1,5 +1,5 @@
 import { Configuration } from 'webpack';
-import { cssLoader, fileLoader, tsLoader } from './loader';
+import { cssLoader, lessLoader, fileLoader, tsLoader } from './loader';
 import { resolve } from './other';
 import { plugins } from './plugin';
 import { paths } from './paths';
@@ -16,7 +16,7 @@ export const webpackConfigFn = (env: Env) => {
 		},
 		mode,
 		module: {
-			rules: [{ ...tsLoader }, { ...cssLoader }, { ...fileLoader }],
+			rules: [{ ...tsLoader }, { ...cssLoader }, { ...lessLoader }, { ...fileLoader }],
 		},
 		resolve,
 		plugins,

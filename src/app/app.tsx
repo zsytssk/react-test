@@ -16,11 +16,48 @@ import { ForceChildReRender } from './advance/forceChildReRender';
 import { UseCallback } from './hook/useCallback';
 import UseRefParent from './hook/useRef';
 import { UseStateTest } from './hook/useState';
+import MobileSelect from 'mobile-select';
+
+import 'mobile-select/mobile-select.css';
 
 const App = () => {
+	useEffect(() => {
+		console.log(`test:>1`);
+		var mobileSelect2 = new MobileSelect({
+			trigger: '#area',
+			title: '地区选择',
+			wheels: [
+				{
+					data: [
+						{ id: '1', value: '附近' },
+						{ id: '2', value: '上城区' },
+						{ id: '3', value: '下城区' },
+						{ id: '4', value: '江干区' },
+						{ id: '5', value: '拱墅区' },
+						{ id: '6', value: '西湖区' },
+					],
+				},
+				{
+					data: [
+						{ id: '1', value: '1000米' },
+						{ id: '2', value: '2000米' },
+						{ id: '3', value: '3000米' },
+						{ id: '4', value: '5000米' },
+						{ id: '5', value: '10000米' },
+					],
+				},
+			],
+			callback: function (indexArr, data) {
+				console.log(data); //Returns the selected json data
+			},
+		});
+		console.log(`test:>2`, mobileSelect2);
+	}, []);
+
 	return (
 		<>
-			<UseStateTest />
+			<div id="area">dsfsdfdsf</div>
+			{/* <UseStateTest /> */}
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}
 			{/* <UseMemoFc /> */}

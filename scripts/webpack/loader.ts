@@ -1,5 +1,5 @@
-export const cssLoader = {
-	test: /(\.css|\.less)$/,
+export const lessLoader = {
+	test: /(\.less)$/,
 	use: [
 		'style-loader',
 		{
@@ -13,6 +13,20 @@ export const cssLoader = {
 			loader: 'less-loader',
 			options: {
 				sourceMap: true,
+			},
+		},
+	],
+};
+
+export const cssLoader = {
+	test: /(\.css)$/,
+	use: [
+		'style-loader',
+		{
+			loader: 'css-loader',
+			options: {
+				sourceMap: true,
+				modules: false,
 			},
 		},
 	],
