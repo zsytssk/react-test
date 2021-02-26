@@ -51,7 +51,6 @@ const App = () => {
 				console.log(data); //Returns the selected json data
 			},
 		});
-		console.log(`test:>2`, mobileSelect2);
 	}, []);
 
 	return (
