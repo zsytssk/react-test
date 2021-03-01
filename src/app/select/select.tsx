@@ -3,16 +3,20 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import style from './select.less';
 import { getEventPosInDom } from './selectUtils';
 
-type Props<T> = {
-	value?: T;
+type Item = {
+	id: string;
+	value: string;
+};
+type Props<T extends Item> = {
+	value?: string;
 	data: T[];
 	title: string;
 	cancelTxt?: string;
 	confirmTxt?: string;
-	onChange: (value: T) => void;
+	onChange: (value: string) => void;
 	itemRender?: (value: T, index: number) => React.ReactNode;
 };
-export function Select<T = any>({
+export function Select<T extends Item>({
 	itemRender,
 	value,
 	data,
@@ -48,10 +52,10 @@ export function Select<T = any>({
 	);
 }
 
-type ListProps<T> = {
-	value: T;
+type ListProps<T extends Item> = {
+	value: string;
 	data: T[];
-	onChange: (value: T) => void;
+	onChange: Props<T>['onChange'];
 	itemRender?: Props<T>['itemRender'];
 };
 type Pos = {
@@ -59,25 +63,22 @@ type Pos = {
 	y: number;
 };
 type Status = 'normal' | 'start' | 'move' | 'end';
-function List<T>({ value, data, onChange, itemRender }: ListProps<T>) {
+function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T>) {
 	const ref = useRef<HTMLUListElement>(null);
 	const onChangeRef = useRef<(index: number) => void>();
 
 	useEffect(() => {
 		onChangeRef.current = (_index: number) => {
-			onChange?.(data[_index]);
+			onChange?.(data[_index].value);
 		};
 	}, [onChange, data]);
 
 	const index = useMemo(() => {
-		return data.indexOf(value);
+		const calcIndex = data.findIndex((item) => item.value === value);
+		return calcIndex === -1 ? 0 : calcIndex;
 	}, [value, data]);
 
 	useEffect(() => {
-		if (index === -1) {
-			return;
-		}
-
 		const dom = ref.current;
 		let endMove = 0;
 		let status: Status = 'normal';
@@ -195,7 +196,7 @@ function List<T>({ value, data, onChange, itemRender }: ListProps<T>) {
 	return (
 		<ul ref={ref}>
 			{data.map((item, index) => {
-				return <li key={index}>{itemRender ? itemRender(item, index) : item}</li>;
+				return <li key={item.id}>{itemRender ? itemRender(item, index) : item.value}</li>;
 			})}
 		</ul>
 	);

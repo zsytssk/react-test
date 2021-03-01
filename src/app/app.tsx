@@ -22,6 +22,7 @@ import 'mobile-select/mobile-select.css';
 import { Select } from './select/select';
 
 const App = () => {
+	const [value, setValue] = useState<any>();
 	useEffect(() => {
 		var mobileSelect2 = new MobileSelect({
 			trigger: '#area',
@@ -68,9 +69,18 @@ const App = () => {
 	return (
 		<>
 			<div id="area">dsfsdfdsf</div>
+			<button
+				onClick={() => setValue(testData[2].value)}
+				style={{
+					position: 'absolute',
+					zIndex: 10001,
+				}}
+			>
+				click
+			</button>
 			<Select
 				data={testData}
-				value={testData[4]}
+				value={value}
 				title="this is a test"
 				onChange={(val) => console.log(`test:>`, val)}
 			/>
