@@ -19,10 +19,10 @@ import { UseStateTest } from './hook/useState';
 import MobileSelect from 'mobile-select';
 
 import 'mobile-select/mobile-select.css';
+import { Select } from './select/select';
 
 const App = () => {
 	useEffect(() => {
-		console.log(`test:>1`);
 		var mobileSelect2 = new MobileSelect({
 			trigger: '#area',
 			title: '地区选择',
@@ -51,11 +51,29 @@ const App = () => {
 				console.log(data); //Returns the selected json data
 			},
 		});
+
+		window.test = mobileSelect2;
+
+		console.log(`test:>1`, mobileSelect2);
 	}, []);
+
+	const testData = [
+		{ id: '1', value: '1000米' },
+		{ id: '2', value: '2000米' },
+		{ id: '3', value: '3000米' },
+		{ id: '4', value: '5000米' },
+		{ id: '5', value: '10000米' },
+	];
 
 	return (
 		<>
 			<div id="area">dsfsdfdsf</div>
+			<Select
+				data={testData}
+				value={testData[4]}
+				title="this is a test"
+				onChange={(val) => console.log(`test:>`, val)}
+			/>
 			{/* <UseStateTest /> */}
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}

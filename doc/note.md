@@ -3,6 +3,14 @@
 
 - @ques context and reducer
 
+## 2021-03-01 20:35:44
+
+- @ques
+  - 初始化的值
+  - 设置值
+  - 样式
+  - 多选
+
 ## 2021-02-26 19:57:46
 
 https://github.com/onlyhom/mobile-select
