@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import style from './select.less';
 import { getEventPosInDom } from './selectUtils';
@@ -8,15 +8,19 @@ type Item = {
 	value: string;
 };
 type Props<T extends Item> = {
+	visible: boolean;
+	onClose: () => void;
+	onChange: (value: string) => void;
 	value?: string;
 	data: T[];
 	title: string;
 	cancelTxt?: string;
 	confirmTxt?: string;
-	onChange: (value: string) => void;
 	itemRender?: (value: T, index: number) => React.ReactNode;
 };
 export function Select<T extends Item>({
+	visible,
+	onClose,
 	itemRender,
 	value,
 	data,
@@ -28,19 +32,40 @@ export function Select<T extends Item>({
 	cancelTxt = cancelTxt || 'cancel';
 	confirmTxt = confirmTxt || 'confirm';
 
+	const [localValue, setLocalValue] = useState<string>();
+	if (!visible) {
+		return null;
+	}
+
+	const onConfirm = () => {
+		onClose();
+		onChange(localValue);
+	};
+
 	return (
-		<div className={style.selectModalWrap}>
-			<div className="select">
+		<div className={`${style.selectModalWrap} ${visible ? style.show : ''}`}>
+			<div className={`select`}>
 				<div className="header">
-					<div className="cancel">{cancelTxt}</div>
+					<div className="cancel" onClick={onClose}>
+						{cancelTxt}
+					</div>
 					<div className="title">{title}</div>
-					<div className="confirm">{confirmTxt}</div>
+					<div className="confirm" onClick={onConfirm}>
+						{confirmTxt}
+					</div>
 				</div>
 				<div className="panel">
 					<div className="fixWidth">
 						<div className="wheels">
 							<div className="wheel">
-								<List itemRender={itemRender} value={value} data={data} onChange={onChange} />
+								<List
+									itemRender={itemRender}
+									value={value}
+									data={data}
+									onChange={(value) => {
+										setLocalValue(value);
+									}}
+								/>
 							</div>
 						</div>
 						<div className="selectLine"></div>
@@ -85,7 +110,17 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 		let dist = 0;
 		let lastPos = {} as Pos;
 
-		const moveDom = (n: number) => {
+		const moveDom = (n: number, ani = false) => {
+			if (ani) {
+				dom.classList.add('ani');
+				dom.addEventListener(
+					'animationend',
+					() => {
+						dom.classList.remove('ani');
+					},
+					false,
+				);
+			}
 			dom.setAttribute('style', `transform: translateY(${n}px)`);
 		};
 		const start = (e: TouchEvent) => {
@@ -168,15 +203,15 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 					newIndex = i;
 				}
 			}
-			moveToIndex(newIndex);
+			moveToIndex(newIndex, true);
 		};
-		const moveToIndex = (index: number) => {
+		const moveToIndex = (index: number, ani = false) => {
 			const parentHeight = dom.parentElement?.getBoundingClientRect()?.height;
 			const itemHeight = dom.children[0]?.getBoundingClientRect()?.height;
 			const middle = parentHeight / 2;
 			endMove = middle - (index * itemHeight + itemHeight / 2);
 			onChangeRef.current?.(index);
-			moveDom(endMove);
+			moveDom(endMove, ani);
 		};
 
 		dom.addEventListener('touchstart', start, { passive: false });

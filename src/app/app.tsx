@@ -23,6 +23,7 @@ import { Select } from './select/select';
 
 const App = () => {
 	const [value, setValue] = useState<any>();
+	const [visible, setVisible] = useState(false);
 	useEffect(() => {
 		var mobileSelect2 = new MobileSelect({
 			trigger: '#area',
@@ -70,19 +71,34 @@ const App = () => {
 		<>
 			<div id="area">dsfsdfdsf</div>
 			<button
-				onClick={() => setValue(testData[2].value)}
+				onClick={() => setVisible(true)}
 				style={{
-					position: 'absolute',
+					position: 'relative',
 					zIndex: 10001,
 				}}
 			>
-				click
+				show
+			</button>
+			<button
+				onClick={() => setValue(testData[2].value)}
+				style={{
+					position: 'relative',
+					zIndex: 10001,
+				}}
+			>
+				changeValue
 			</button>
 			<Select
+				visible={visible}
+				onClose={() => {
+					setVisible(false);
+				}}
 				data={testData}
 				value={value}
 				title="this is a test"
-				onChange={(val) => console.log(`test:>`, val)}
+				onChange={(val) => {
+					setValue(val);
+				}}
 			/>
 			{/* <UseStateTest /> */}
 			{/* <ReduxTest /> */}
