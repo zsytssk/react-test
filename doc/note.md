@@ -3,6 +3,30 @@
 
 - @ques context and reducer
 
+## 2021-03-04 16:13:46
+
+- @todo datePicker
+
+  - 基本功能
+  - 国际化
+  - 年月切换
+  - 全部 api （antd）
+  - disable
+
+- @ques api
+
+  - valueOf timeStamp
+  - month()
+  - day()
+  - year()
+
+- @ques
+
+  - 当前时间, 当前是几月几号 dayjs().format()
+  - 获取当前月 总共有几天 - daysInMonth()
+  - 月份的开始 dayjs().startOf('month') 结束 dayjs().endOf('month')
+  - dayjs().subtract(7, 'day')
+
 ## 2021-03-01 20:35:44
 
 - @ques
