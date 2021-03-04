@@ -3,15 +3,7 @@ import React, { useEffect, useState } from 'react';
 import weekday from 'dayjs/plugin/weekday';
 import dayjs from 'dayjs';
 import style from './DatePicker.less';
-import { daysToWeeksDays } from './datePickerUtils';
 import { MonthView } from './MonthView';
-
-dayjs.extend(weekday);
-
-type Item = {
-	day: dayjs.Dayjs;
-	inMonth: boolean;
-};
 
 export function DatePicker() {
 	const [month, setMonth] = useState<dayjs.Dayjs>();
