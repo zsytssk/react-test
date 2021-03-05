@@ -18,7 +18,7 @@ import UseRefParent from './hook/useRef';
 import { UseStateTest } from './hook/useState';
 import MobileSelect from 'mobile-select';
 
-import zh from 'dayjs/locale/zh-cn';
+import vi from 'dayjs/locale/vi';
 import 'mobile-select/mobile-select.css';
 import { Select } from './select/select';
 import { DatePicker } from './datePicker/DatePicker';
@@ -28,11 +28,9 @@ const App = () => {
 		<>
 			<DatePicker
 				tz="America/New_York"
-				locale={zh}
+				locale={vi}
 				disabledDate={(current) => current < Date.now()}
-				onChange={(val: number) => {
-					console.log(`test:>`, val);
-				}}
+				onChange={(val: number) => {}}
 			/>
 			{/* <UseStateTest /> */}
 			{/* <ReduxTest /> */}
