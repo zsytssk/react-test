@@ -27,6 +27,7 @@ const App = () => {
 	return (
 		<>
 			<DatePicker
+				tz="America/New_York"
 				locale={zh}
 				disabledDate={(current) => current < Date.now()}
 				onChange={(val: number) => {

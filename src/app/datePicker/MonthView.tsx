@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import classnames from 'classnames';
 import { daysToWeeksDays } from './datePickerUtils';
-import { dayInstance } from './DatePicker';
+import { dayNow } from './DatePicker';
 import { Locale } from 'dayjs/locale/*';
 
 type Item = {
@@ -49,7 +49,7 @@ export function MonthView({ month, onSelect, selectDay, disabledDate, locale }: 
 		return daysToWeeksDays(days);
 	}, [days]);
 
-	const weekdaysMin = dayInstance.locale(locale.name).localeData().weekdaysMin();
+	const weekdaysMin = dayNow.locale(locale.name).localeData().weekdaysMin();
 
 	return (
 		<div className="inner">

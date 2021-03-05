@@ -4,27 +4,33 @@ import { Locale } from 'dayjs/locale/*';
 import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import localeData from 'dayjs/plugin/localeData';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(localeData);
 dayjs.extend(weekday);
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 import style from './DatePicker.less';
 import { MonthView } from './MonthView';
 
 type Props = {
+	tz?: string;
 	locale?: Locale;
 	className?: string;
 	onChange?: (value: number) => void;
 	disabledDate?: (current: number) => boolean;
 };
-export const dayInstance = dayjs();
-export function DatePicker({ className, disabledDate, onChange, locale }: Props) {
+export let dayNow = dayjs();
+export function DatePicker({ className, disabledDate, onChange, locale, tz }: Props) {
 	const [month, setMonth] = useState<dayjs.Dayjs>();
 	const [selectDay, setSelectDay] = useState<dayjs.Dayjs>();
 
 	useEffect(() => {
-		setMonth(dayjs());
-	}, []);
+		dayNow = dayjs.tz(dayNow, tz);
+		setMonth(dayNow);
+	}, [tz]);
 
 	const preMonth = () => {
 		setMonth(month.subtract(1, 'month'));
@@ -42,6 +48,7 @@ export function DatePicker({ className, disabledDate, onChange, locale }: Props)
 		setSelectDay(date);
 		onChange?.(date.valueOf());
 	};
+
 	return (
 		<div className={classnames(style.datePicker, className)}>
 			<div className="header">
@@ -51,7 +58,7 @@ export function DatePicker({ className, disabledDate, onChange, locale }: Props)
 				<div className="preBox" onClick={preMonth}>
 					<span className="icon"></span>
 				</div>
-				<div className="inner">{month?.format('YYYY/MM')}</div>
+				<div className="inner">{dayjs.tz(month, tz)?.format('YYYY/MM')}</div>
 				<div className="nextBox" onClick={nextMonth}>
 					<span className="icon"></span>
 				</div>
@@ -69,8 +76,8 @@ export function DatePicker({ className, disabledDate, onChange, locale }: Props)
 				/>
 			</div>
 			<div className="footer">
-				<div className="today" onClick={() => onSelect(dayInstance)}>
-					{dayInstance.format(`YYYY/MM/DD`)}
+				<div className="today" onClick={() => onSelect(dayNow.startOf('day'))}>
+					{dayNow.format(`YYYY/MM/DD`)}
 				</div>
 			</div>
 		</div>
