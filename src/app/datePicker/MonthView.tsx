@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import weekday from 'dayjs/plugin/weekday';
 import dayjs from 'dayjs';
 import classnames from 'classnames';
-import style from './DatePicker.less';
 import { daysToWeeksDays } from './datePickerUtils';
-
-dayjs.extend(weekday);
+import { dayInstance } from './DatePicker';
+import { Locale } from 'dayjs/locale/*';
 
 type Item = {
 	day: dayjs.Dayjs;
 	inMonth: boolean;
+	disable: boolean;
 };
 
 type Props = {
+	locale?: Locale;
 	month: dayjs.Dayjs;
 	onSelect: (date: dayjs.Dayjs) => void;
 	selectDay: dayjs.Dayjs;
+	disabledDate?: (current: number) => boolean;
 };
-export function MonthView({ month, onSelect, selectDay }: Props) {
+
+export function MonthView({ month, onSelect, selectDay, disabledDate, locale }: Props) {
 	const [days, setDays] = useState<Item[]>([]);
 
 	useEffect(() => {
@@ -37,28 +39,30 @@ export function MonthView({ month, onSelect, selectDay }: Props) {
 			dayArr.push({
 				day: dayItem,
 				inMonth,
+				disable: disabledDate?.(dayItem.valueOf()),
 			});
 		}
 		setDays(dayArr);
-	}, [month]);
+	}, [month, disabledDate]);
 
-	const weeksDays = daysToWeeksDays(days);
+	const weeksDays = useMemo(() => {
+		return daysToWeeksDays(days);
+	}, [days]);
+
+	const weekdaysMin = dayInstance.locale(locale.name).localeData().weekdaysMin();
+
 	return (
 		<div className="inner">
 			<div className="top">
-				<div>日</div>
-				<div>一</div>
-				<div>二</div>
-				<div>三</div>
-				<div>四</div>
-				<div>五</div>
-				<div>六</div>
+				{weekdaysMin.map((item, index) => (
+					<div key={index}>{item}</div>
+				))}
 			</div>
 			<div className="con">
 				{weeksDays.map((weekDays, index) => {
 					return (
 						<div className="line" key={index}>
-							{weekDays.map(({ day, inMonth }, index) => {
+							{weekDays.map(({ day, inMonth, disable }, index) => {
 								let cur = false;
 								if (selectDay) {
 									if (selectDay.valueOf() - day.valueOf() < 24 * 60 * 60 * 1000) {
@@ -71,10 +75,15 @@ export function MonthView({ month, onSelect, selectDay }: Props) {
 											cell: true,
 											inView: inMonth,
 											cur,
+											disable,
 										})}
 										key={index}
 										title={day.format('YYYY/MM/DD')}
-										onClick={() => onSelect(day)}
+										onClick={() => {
+											if (!disable) {
+												onSelect(day);
+											}
+										}}
 									>
 										<div className="in">{day.date()}</div>
 									</div>

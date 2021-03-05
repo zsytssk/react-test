@@ -176,6 +176,17 @@
 								background: #444084;
 							}
 						}
+						&.disable {
+							cursor: not-allowed;
+							&:before {
+								background: #e8ebfc;
+							}
+							.in {
+								&:hover {
+									background: transparent;
+								}
+							}
+						}
 						&.inView {
 							color: rgba(0, 0, 0, 085);
 						}
