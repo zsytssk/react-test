@@ -11,6 +11,10 @@
 
 - @ques 可以使用 mouseStart。。。
 
+- @ques 移动 dropdown ｜ tz vi
+  - 迁移项目
+  - h5 范围选择
+
 ## 2021-03-04 16:13:46
 
 - liteDatePicker

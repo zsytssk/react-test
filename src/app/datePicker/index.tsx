@@ -1,80 +1,59 @@
 import React, { useRef, useState } from 'react';
-import classnames from 'classnames';
-import dayjs from 'dayjs';
-import PcDatePicker, { Props as PcDatePickerProps } from './PcDatePicker';
+import PcDatePicker from './PcDatePicker';
 import MobileDatePicker from './MobileDatePicker';
 import { useTouchStartOutside } from '../utils';
 import Dropdown from '../Dropdown';
+import { Locale } from 'dayjs/locale/*';
 
-type Props = {
+export type Props = {
+	tz?: string;
+	locale?: Locale;
 	value?: number;
 	isMobile: boolean;
-	onChange: PcDatePickerProps['onChange'];
-	disabledDate?: PcDatePickerProps['disabledDate'];
+	onChange: (value: number) => void;
+	disabledDate?: (current: number) => boolean;
 	dropClassName?: string;
 	className?: string;
+	title: string;
 };
 
 export default function DatePicker({
-	dropClassName,
+	locale,
+	tz,
 	className,
+	dropClassName,
 	isMobile,
 	disabledDate,
 	onChange,
 	value,
+	title,
 }: Props) {
-	const inputRef = useRef<HTMLInputElement>(null);
-	const dropdownRef = useRef<HTMLDivElement>(null);
-	const [visible, setVisible] = useState(false);
-
-	useTouchStartOutside([dropdownRef, inputRef], (e: any) => {
-		setVisible?.(false);
-		inputRef.current?.blur();
-	});
-
 	return (
 		<>
 			{isMobile ? (
 				<MobileDatePicker
+					tz={tz}
 					value={value}
+					title={title}
+					dropClassName={dropClassName}
+					className={className}
 					disabledDate={disabledDate}
 					onChange={(val: number) => {
 						onChange?.(val);
-						setVisible(false);
 					}}
 				/>
 			) : (
-				<Dropdown
-					visible={visible}
-					overlay={() => {
-						return (
-							<div ref={dropdownRef} className={classnames(dropClassName)}>
-								<PcDatePicker
-									value={value}
-									disabledDate={disabledDate}
-									onChange={(val: number) => {
-										onChange?.(val);
-										setVisible(false);
-									}}
-								/>
-							</div>
-						);
+				<PcDatePicker
+					locale={locale}
+					tz={tz}
+					value={value}
+					dropClassName={dropClassName}
+					className={className}
+					disabledDate={disabledDate}
+					onChange={(val: number) => {
+						onChange?.(val);
 					}}
-				>
-					<div className={classnames(className)}>
-						<input
-							ref={inputRef}
-							type="text"
-							value={dayjs(value).format('YYYY/MM/DD')}
-							onFocus={() => setVisible(true)}
-							onBlur={() => {
-								if (visible) {
-									inputRef.current?.focus();
-								}
-							}}
-						/>
-					</div>
-				</Dropdown>
+				/>
 			)}
 		</>
 	);

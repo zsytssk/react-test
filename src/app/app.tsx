@@ -21,15 +21,23 @@ import dayjs from 'dayjs';
 import 'mobile-select/mobile-select.css';
 import DatePicker from './DatePicker';
 import SelectMobile from './SelectMobile';
+import { useWindowResize } from './utils';
 
 const App = () => {
+	const [value, setVale] = useState<number>();
+	const { innerWidth } = useWindowResize();
+
 	return (
 		<>
+			{dayjs.tz(undefined, 'Etc/GMT+12').format('YYYY/MM/DD HH:mm')}
 			<DatePicker
+				tz="Etc/GMT+12"
+				title={'Select Date1'}
 				className="datePicker"
-				isMobile={true}
+				isMobile={innerWidth < 1024}
+				value={value}
 				onChange={(val) => {
-					console.log(val);
+					setVale(val);
 				}}
 			/>
 			{/* <DatePicker

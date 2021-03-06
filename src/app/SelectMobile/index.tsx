@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import SVG from 'react-inlinesvg';
+import classnames from 'classnames';
 
 import style from './style.module.less';
 import closeIcon from './close.svg';
@@ -11,8 +12,9 @@ type Item<T> = {
 type Props<T> = {
 	visible: boolean;
 	onClose: () => void;
-	onChange: (value: T) => void;
-	onMultiChange: (value: T, index: number) => void;
+	onChange?: (value: T) => void;
+	onMultiUpdate: (value: T, index: number) => void;
+	onMultiChange: (value: T[]) => void;
 	value?: any;
 	data?: Item<T>[];
 	mulValue?: T[];
@@ -22,6 +24,7 @@ type Props<T> = {
 	confirmTxt?: string;
 	isEqual?: (value: T, item: T) => boolean;
 	itemRender?: (value: Item<T>, index: number) => React.ReactNode;
+	className?: string;
 };
 
 export default function SelectMobile<T>({
@@ -31,6 +34,7 @@ export default function SelectMobile<T>({
 	value,
 	data,
 	onChange,
+	onMultiUpdate,
 	onMultiChange,
 	title,
 	cancelTxt,
@@ -38,6 +42,7 @@ export default function SelectMobile<T>({
 	mulData,
 	mulValue,
 	isEqual,
+	className,
 }: Props<T>) {
 	cancelTxt = cancelTxt || 'cancel';
 	confirmTxt = confirmTxt || 'confirm';
@@ -45,19 +50,40 @@ export default function SelectMobile<T>({
 	const [localValue, setLocalValue] = useState<T>();
 	const [localMultiValue, setLocalMulValue] = useState<T[]>();
 
+	useEffect(() => {
+		setLocalMulValue([...mulValue]);
+	}, [mulValue]);
+
+	const setMultiUpdate = (val: T, index: number) => {
+		if (onMultiUpdate) {
+			onMultiUpdate(val, index);
+		} else {
+			localMultiValue[index] = val;
+			setLocalMulValue([...localMultiValue]);
+		}
+	};
+
+	const onConfirm = () => {
+		onClose();
+		if (localValue) {
+			onChange(localValue);
+		} else if (localMultiValue) {
+			onMultiChange([...localMultiValue]);
+		}
+	};
+
 	if (!visible || (!data?.length && !mulData?.length)) {
 		return null;
 	}
 
-	// const onLocalMulValueChange = (val: T, index: number) => {
-	//   localMultiValue[]
-	// };
-	const onConfirm = () => {
-		onClose();
-		onChange(localValue);
-	};
 	return (
-		<div className={`${style.selectModalWrap} ${visible ? style.show : ''}`}>
+		<div
+			className={classnames({
+				[style.selectModalWrap]: true,
+				[style.show]: visible,
+				[className]: Boolean(className),
+			})}
+		>
 			<div className="mask" onClick={onClose}></div>
 			<div className={`select`}>
 				<div className="header">
@@ -79,7 +105,7 @@ export default function SelectMobile<T>({
 												value={mulValue[index]}
 												data={item}
 												onChange={(value) => {
-													onMultiChange(value, index);
+													setMultiUpdate(value, index);
 												}}
 											/>
 										</div>

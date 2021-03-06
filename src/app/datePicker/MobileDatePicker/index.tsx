@@ -12,17 +12,17 @@ dayjs.extend(weekday);
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
-import style from './style.module.less';
-import { MonthView } from './MonthView';
 import SelectMobile from '@app/app/SelectMobile';
 
 export type Props = {
 	tz?: string;
 	locale?: Locale;
+	dropClassName?: string;
 	className?: string;
 	onChange?: (value: number) => void;
 	disabledDate?: (current: number) => boolean;
 	value?: number;
+	title: string;
 };
 
 type Item = {
@@ -34,10 +34,11 @@ export let dayNow = dayjs();
 export default function DatePicker({
 	value,
 	className,
+	dropClassName,
 	disabledDate,
 	onChange,
-	locale,
 	tz,
+	title,
 }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [visible, setVisible] = useState(true);
@@ -48,8 +49,19 @@ export default function DatePicker({
 	const [month, setMonth] = useState<dayjs.Dayjs>();
 	const [day, setDay] = useState<dayjs.Dayjs>();
 
+	console.log(`test:>`, tz);
 	useEffect(() => {
-		const yearStart = dayjs().startOf('year');
+		if (!visible) {
+			return;
+		}
+		dayNow = dayjs.tz(dayNow, tz);
+		setYear(dayNow.startOf('year'));
+		setMonth(dayNow.startOf('month'));
+		setDay(dayNow.startOf('day'));
+	}, [value, tz, visible]);
+
+	useEffect(() => {
+		const yearStart = dayNow.startOf('year');
 		const years: Item[] = [];
 		years.push({
 			label: yearStart.year(),
@@ -83,13 +95,6 @@ export default function DatePicker({
 	}, []);
 
 	useEffect(() => {
-		const now = dayjs(value);
-		setYear(now.startOf('year'));
-		setMonth(now.startOf('month'));
-		setDay(now.startOf('day'));
-	}, [value]);
-
-	useEffect(() => {
 		if (!month) {
 			return;
 		}
@@ -113,31 +118,34 @@ export default function DatePicker({
 
 	return (
 		<>
-			<SelectMobile
+			<SelectMobile<dayjs.Dayjs>
+				className={classnames(dropClassName)}
 				visible={visible}
 				onClose={() => setVisible(false)}
-				onChange={(val) => console.log(val)}
-				title={'Select Date'}
+				title={title || 'Select Date'}
 				mulData={[years, months, days]}
 				mulValue={[year, month, day]}
 				isEqual={(item, value) => {
 					return item.isSame(value);
 				}}
-				onMultiChange={(val: dayjs.Dayjs, index: number) => {
+				onMultiUpdate={(val: dayjs.Dayjs, index: number) => {
 					if (index === 0) {
 						setYear(val);
 					} else if (index === 1) {
 						setMonth(val);
-					} else if (index === 1) {
+					} else if (index === 2) {
 						setDay(val);
 					}
+				}}
+				onMultiChange={(val: dayjs.Dayjs[]) => {
+					onChange(val[2].valueOf());
 				}}
 			/>
 			<div className={classnames(className)}>
 				<input
 					ref={inputRef}
 					type="text"
-					value={dayjs(value).format('YYYY/MM/DD')}
+					value={value ? dayjs.tz(value, tz).format('YYYY/MM/DD') : ''}
 					onFocus={() => setVisible(true)}
 				/>
 			</div>

@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import classnames from 'classnames';
 import { daysToWeeksDays } from '../datePickerUtils';
-import { dayNow } from '.';
+import { dayNow } from './DatePickerPanel';
 import { Locale } from 'dayjs/locale/*';
 
 type Item = {

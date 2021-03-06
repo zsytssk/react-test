@@ -1,98 +1,63 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import classnames from 'classnames';
-import { Locale } from 'dayjs/locale/*';
 import dayjs from 'dayjs';
-import weekday from 'dayjs/plugin/weekday';
-import localeData from 'dayjs/plugin/localeData';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
+import { DatePickerPanel, Props as PcDatePickerProps } from './DatePickerPanel';
+import { useTouchStartOutside } from '../../utils';
+import Dropdown from '../../Dropdown';
 
-dayjs.extend(localeData);
-dayjs.extend(weekday);
-dayjs.extend(timezone);
-dayjs.extend(utc);
+import { Props } from '../';
 
-import style from './style.module.less';
-import { MonthView } from './MonthView';
+export default function PcDatePicker({
+	tz,
+	locale,
+	dropClassName,
+	className,
+	disabledDate,
+	onChange,
+	value,
+}: Omit<Props, 'isMobile' | 'title'>) {
+	const inputRef = useRef<HTMLInputElement>(null);
+	const dropdownRef = useRef<HTMLDivElement>(null);
+	const [visible, setVisible] = useState(false);
 
-export type Props = {
-  tz?: string;
-  locale?: Locale;
-  className?: string;
-  onChange?: (value: number) => void;
-  disabledDate?: (current: number) => boolean;
-  value?: number;
-};
-export let dayNow = dayjs();
-export default function DatePicker({ value, className, disabledDate, onChange, locale, tz }: Props) {
-  const [month, setMonth] = useState<dayjs.Dayjs>();
-  const [selectDay, setSelectDay] = useState<dayjs.Dayjs>();
+	useTouchStartOutside([dropdownRef, inputRef], (e: any) => {
+		setVisible?.(false);
+		inputRef.current?.blur();
+	});
 
-  useEffect(() => {
-    dayNow = dayjs.tz(dayNow, tz);
-    if (!value) {
-      setMonth(dayNow);
-    } else {
-      const day = dayjs.tz(value, tz);
-      setMonth(day);
-      setSelectDay(day);
-    }
-  }, [value, tz]);
-
-  const preMonth = () => {
-    setMonth(month?.subtract(1, 'month'));
-  };
-  const nextMonth = () => {
-    setMonth(month?.add(1, 'month'));
-  };
-  const preYear = () => {
-    setMonth(month?.subtract(1, 'year'));
-  };
-  const nextYear = () => {
-    setMonth(month?.add(1, 'year'));
-  };
-  const onSelect = (date: dayjs.Dayjs) => {
-    setSelectDay(date);
-    onChange?.(date.valueOf());
-  };
-
-  return (
-    <div
-      className={classnames(style.datePicker, className)}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-    >
-      <div className="header">
-        <div className="supperPreBox" onClick={preYear}>
-          <span className="icon"></span>
-        </div>
-        <div className="preBox" onClick={preMonth}>
-          <span className="icon"></span>
-        </div>
-        <div className="inner">{dayjs.tz(month as dayjs.Dayjs, tz)?.format('YYYY/MM')}</div>
-        <div className="nextBox" onClick={nextMonth}>
-          <span className="icon"></span>
-        </div>
-        <div className="supperNextBox" onClick={nextYear}>
-          <span className="icon"></span>
-        </div>
-      </div>
-      <div className="body">
-        <MonthView
-          locale={locale}
-          disabledDate={disabledDate}
-          month={month}
-          onSelect={onSelect}
-          selectDay={selectDay}
-        />
-      </div>
-      <div className="footer">
-        <div className="today" onClick={() => onSelect(dayNow.startOf('day'))}>
-          {dayNow.format(`YYYY/MM/DD`)}
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<Dropdown
+			visible={visible}
+			overlay={() => {
+				return (
+					<div ref={dropdownRef} className={classnames(dropClassName)}>
+						<DatePickerPanel
+							tz={tz}
+							locale={locale}
+							value={value}
+							disabledDate={disabledDate}
+							onChange={(val: number) => {
+								onChange?.(val);
+								setVisible(false);
+							}}
+						/>
+					</div>
+				);
+			}}
+		>
+			<div className={classnames(className)}>
+				<input
+					ref={inputRef}
+					type="text"
+					value={value ? dayjs(value).format('YYYY/MM/DD') : ''}
+					onFocus={() => setVisible(true)}
+					onBlur={() => {
+						if (visible) {
+							inputRef.current?.focus();
+						}
+					}}
+				/>
+			</div>
+		</Dropdown>
+	);
 }
