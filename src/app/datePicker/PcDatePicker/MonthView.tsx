@@ -2,21 +2,21 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import dayjs from 'dayjs';
 import classnames from 'classnames';
-import { daysToWeeksDays } from './datePickerUtils';
-import { dayNow } from './DatePicker';
+import { daysToWeeksDays } from '../datePickerUtils';
+import { dayNow } from '.';
 import { Locale } from 'dayjs/locale/*';
 
 type Item = {
 	day: dayjs.Dayjs;
 	inMonth: boolean;
-	disable: boolean;
+	disable?: boolean;
 };
 
 type Props = {
 	locale?: Locale;
-	month: dayjs.Dayjs;
+	month?: dayjs.Dayjs;
 	onSelect: (date: dayjs.Dayjs) => void;
-	selectDay: dayjs.Dayjs;
+	selectDay?: dayjs.Dayjs;
 	disabledDate?: (current: number) => boolean;
 };
 
@@ -49,7 +49,10 @@ export function MonthView({ month, onSelect, selectDay, disabledDate, locale }: 
 		return daysToWeeksDays(days);
 	}, [days]);
 
-	const weekdaysMin = dayNow.locale(locale.name).localeData().weekdaysMin();
+	const weekdaysMin = dayNow
+		.locale(locale?.name || 'en')
+		.localeData()
+		.weekdaysMin();
 
 	return (
 		<div className="inner">
@@ -79,7 +82,7 @@ export function MonthView({ month, onSelect, selectDay, disabledDate, locale }: 
 										})}
 										key={index}
 										title={day.format('YYYY/MM/DD')}
-										onClick={() => {
+										onClick={(e) => {
 											if (!disable) {
 												onSelect(day);
 											}

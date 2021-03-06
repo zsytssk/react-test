@@ -1,114 +1,163 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import SVG from 'react-inlinesvg';
 
-import style from './select.less';
-import { getEventPosInDom } from './selectUtils';
+import style from './style.module.less';
+import closeIcon from './close.svg';
 
-type Item = {
-	id: string;
-	value: string;
+type Item<T> = {
+	label: string | number;
+	value: any;
 };
-type Props<T extends Item> = {
+type Props<T> = {
 	visible: boolean;
 	onClose: () => void;
-	onChange: (value: string) => void;
-	value?: string;
-	data: T[];
+	onChange: (value: T) => void;
+	onMultiChange: (value: T, index: number) => void;
+	value?: any;
+	data?: Item<T>[];
+	mulValue?: T[];
+	mulData?: Item<T>[][];
 	title: string;
 	cancelTxt?: string;
 	confirmTxt?: string;
-	itemRender?: (value: T, index: number) => React.ReactNode;
+	isEqual?: (value: T, item: T) => boolean;
+	itemRender?: (value: Item<T>, index: number) => React.ReactNode;
 };
-export function Select<T extends Item>({
+
+export default function SelectMobile<T>({
 	visible,
 	onClose,
 	itemRender,
 	value,
 	data,
 	onChange,
+	onMultiChange,
 	title,
 	cancelTxt,
 	confirmTxt,
+	mulData,
+	mulValue,
+	isEqual,
 }: Props<T>) {
 	cancelTxt = cancelTxt || 'cancel';
 	confirmTxt = confirmTxt || 'confirm';
 
-	const [localValue, setLocalValue] = useState<string>();
-	if (!visible) {
+	const [localValue, setLocalValue] = useState<T>();
+	const [localMultiValue, setLocalMulValue] = useState<T[]>();
+
+	if (!visible || (!data?.length && !mulData?.length)) {
 		return null;
 	}
 
+	// const onLocalMulValueChange = (val: T, index: number) => {
+	//   localMultiValue[]
+	// };
 	const onConfirm = () => {
 		onClose();
 		onChange(localValue);
 	};
-
 	return (
 		<div className={`${style.selectModalWrap} ${visible ? style.show : ''}`}>
+			<div className="mask" onClick={onClose}></div>
 			<div className={`select`}>
 				<div className="header">
-					<div className="cancel" onClick={onClose}>
-						{cancelTxt}
-					</div>
 					<div className="title">{title}</div>
-					<div className="confirm" onClick={onConfirm}>
-						{confirmTxt}
+					<div className="cancel" onClick={onClose}>
+						<SVG src={closeIcon} />
 					</div>
 				</div>
 				<div className="panel">
 					<div className="fixWidth">
 						<div className="wheels">
-							<div className="wheel">
-								<List
-									itemRender={itemRender}
-									value={value}
-									data={data}
-									onChange={(value) => {
-										setLocalValue(value);
-									}}
-								/>
-							</div>
+							{mulData ? (
+								mulData.map((item, index) => {
+									return (
+										<div className="wheel" key={index}>
+											<List
+												isEqual={isEqual}
+												itemRender={itemRender}
+												value={mulValue[index]}
+												data={item}
+												onChange={(value) => {
+													onMultiChange(value, index);
+												}}
+											/>
+										</div>
+									);
+								})
+							) : (
+								<div className="wheel">
+									<List
+										itemRender={itemRender}
+										value={value}
+										data={data}
+										isEqual={isEqual}
+										onChange={(value) => {
+											setLocalValue(value);
+										}}
+									/>
+								</div>
+							)}
 						</div>
 						<div className="selectLine"></div>
 						<div className="shadowMask"></div>
 					</div>
+				</div>
+				<div className="confirmBox" onClick={onConfirm}>
+					<div className="btnConfirm">{confirmTxt}</div>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-type ListProps<T extends Item> = {
-	value: string;
-	data: T[];
+type ListProps<T> = {
+	value?: T;
+	data: Item<T>[];
 	onChange: Props<T>['onChange'];
 	itemRender?: Props<T>['itemRender'];
+	isEqual?: (value: T, item: T) => boolean;
 };
 type Pos = {
 	x: number;
 	y: number;
 };
 type Status = 'normal' | 'start' | 'move' | 'end';
-function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T>) {
+function List<T>({ value, data, onChange, itemRender, isEqual }: ListProps<T>) {
 	const ref = useRef<HTMLUListElement>(null);
 	const onChangeRef = useRef<(index: number) => void>();
 
 	useEffect(() => {
 		onChangeRef.current = (_index: number) => {
+			if (!data?.length) {
+				return;
+			}
 			onChange?.(data[_index].value);
 		};
 	}, [onChange, data]);
 
 	const index = useMemo(() => {
-		const calcIndex = data.findIndex((item) => item.value === value);
+		const calcIndex = data.findIndex((item) => {
+			if (isEqual) {
+				return isEqual(item.value, value);
+			} else {
+				return item.value === value;
+			}
+		});
 		return calcIndex === -1 ? 0 : calcIndex;
 	}, [value, data]);
 
 	useEffect(() => {
 		const dom = ref.current;
+
 		let endMove = 0;
 		let status: Status = 'normal';
 		let dist = 0;
 		let lastPos = {} as Pos;
+
+		if (!dom) {
+			return;
+		}
 
 		const moveDom = (n: number, ani = false) => {
 			if (ani) {
@@ -125,7 +174,7 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 		};
 		const start = (e: TouchEvent) => {
 			e.preventDefault();
-			const pos = getEventPosInDom(dom, e);
+			const pos = getEventPosInDom(e);
 			lastPos = pos;
 			status = 'start';
 		};
@@ -135,7 +184,7 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 			}
 			e.preventDefault();
 			status = 'move';
-			const newPos = getEventPosInDom(dom, e);
+			const newPos = getEventPosInDom(e);
 			const distPos = {
 				x: newPos.x - lastPos.x,
 				y: newPos.y - lastPos.y,
@@ -162,8 +211,12 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 			lastPos = {} as Pos;
 		};
 
-		const isOut = (move: number = 0) => {
+		const isOut = (move = 0) => {
 			const parentHeight = dom.parentElement?.getBoundingClientRect()?.height;
+			if (!parentHeight) {
+				return false;
+			}
+
 			const itemHeight = dom.children[0]?.getBoundingClientRect()?.height;
 			const len = dom.children.length;
 			const middle = parentHeight / 2;
@@ -188,7 +241,7 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 			return false;
 		};
 
-		const calcCurIndex = (move: number = 0) => {
+		const calcCurIndex = (move = 0) => {
 			const parentHeight = dom.parentElement?.getBoundingClientRect()?.height;
 			const itemHeight = dom.children[0]?.getBoundingClientRect()?.height;
 			const middle = parentHeight / 2;
@@ -205,6 +258,7 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 			}
 			moveToIndex(newIndex, true);
 		};
+
 		const moveToIndex = (index: number, ani = false) => {
 			const parentHeight = dom.parentElement?.getBoundingClientRect()?.height;
 			const itemHeight = dom.children[0]?.getBoundingClientRect()?.height;
@@ -226,13 +280,21 @@ function List<T extends Item>({ value, data, onChange, itemRender }: ListProps<T
 			document.body.removeEventListener('touchend', end);
 			document.body.removeEventListener('touchcancel', end);
 		};
-	}, [index]);
+	}, [index, data]);
 
 	return (
 		<ul ref={ref}>
 			{data.map((item, index) => {
-				return <li key={item.id}>{itemRender ? itemRender(item, index) : item.value}</li>;
+				return <li key={index}>{itemRender ? itemRender(item, index) : item.label}</li>;
 			})}
 		</ul>
 	);
+}
+
+function getEventPosInDom(event: TouchEvent): { x: number; y: number } {
+	const myLocation = event.changedTouches[0];
+	return {
+		x: myLocation.clientX,
+		y: myLocation.clientY,
+	};
 }

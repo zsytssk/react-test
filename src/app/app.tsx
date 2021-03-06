@@ -16,22 +16,28 @@ import { ForceChildReRender } from './advance/forceChildReRender';
 import { UseCallback } from './hook/useCallback';
 import UseRefParent from './hook/useRef';
 import { UseStateTest } from './hook/useState';
-import MobileSelect from 'mobile-select';
 
-import vi from 'dayjs/locale/vi';
+import dayjs from 'dayjs';
 import 'mobile-select/mobile-select.css';
-import { Select } from './select/select';
-import { DatePicker } from './datePicker/DatePicker';
+import DatePicker from './DatePicker';
+import SelectMobile from './SelectMobile';
 
 const App = () => {
 	return (
 		<>
 			<DatePicker
+				className="datePicker"
+				isMobile={true}
+				onChange={(val) => {
+					console.log(val);
+				}}
+			/>
+			{/* <DatePicker
 				tz="America/New_York"
 				locale={vi}
 				disabledDate={(current) => current < Date.now()}
 				onChange={(val: number) => {}}
-			/>
+			/> */}
 			{/* <UseStateTest /> */}
 			{/* <ReduxTest /> */}
 			{/* <UseReducerFc /> */}
