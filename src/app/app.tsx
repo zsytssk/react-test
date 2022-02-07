@@ -22,6 +22,7 @@ import 'mobile-select/mobile-select.css';
 import DatePicker from './DatePicker';
 import SelectMobile from './SelectMobile';
 import { useWindowResize } from './utils';
+import { Pagination } from './Pagination';
 
 const App = () => {
 	const [value, setVale] = useState<number>();
@@ -29,7 +30,8 @@ const App = () => {
 
 	return (
 		<>
-			{dayjs.tz(undefined, 'Etc/GMT+12').format('YYYY/MM/DD HH:mm')}
+			<Pagination current={0} total={500} onChange={(index) => console.log(index)} />
+			{/* {dayjs.tz(undefined, 'Etc/GMT+12').format('YYYY/MM/DD HH:mm')}
 			<DatePicker
 				tz="Etc/GMT+12"
 				title={'Select Date1'}
@@ -39,7 +41,7 @@ const App = () => {
 				onChange={(val) => {
 					setVale(val);
 				}}
-			/>
+			/> */}
 			{/* <DatePicker
 				tz="America/New_York"
 				locale={vi}

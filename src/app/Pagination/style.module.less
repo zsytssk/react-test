@@ -1,0 +1,19 @@
+:global {
+	.btPagination {
+		font-size: 14px;
+		display: flex;
+		& > div {
+			height: 30px;
+			line-height: 30px;
+			padding: 0 10px;
+			border: 1px solid #ddd;
+			cursor: pointer;
+			&.cur {
+				border-color: #000;
+			}
+			&:not(:first-child) {
+				margin-left: 10px;
+			}
+		}
+	}
+}
